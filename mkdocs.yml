@@ -1,4 +1,35 @@
 site_name: crazytrain
-site_url:
+site_url: https://mda21.github.io/crazytrain/
 theme:
   name: material
+  theme:
+  name: material
+  language: zh-CN       # 设置语言为简体中文
+  palette:              # 切换夜间模式的按钮
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:             # 一些好用的功能
+    - navigation.tabs   # 顶部导航栏
+    - navigation.top    # 回到顶部按钮
+    - search.suggest    # 搜索建议
+    - search.highlight  # 搜索高亮
+
+# 扩展 Markdown 功能 (按需开启)
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+# 导航栏结构 (如果不写这一项，它会自动根据文件夹生成)
+nav:
+  - 首页: index.md
+  - 课外项目:
+      - TinyRenderer:TinyRenderer/README.md
