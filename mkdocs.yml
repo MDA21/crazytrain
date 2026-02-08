@@ -4,7 +4,7 @@ theme:
   name: material
   theme:
   name: material
-  language: zh-CN       # 设置语言为简体中文
+  language: zh       # 设置语言为简体中文
   palette:              # 切换夜间模式的按钮
     - scheme: default
       toggle:
