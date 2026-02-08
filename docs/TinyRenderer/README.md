@@ -211,18 +211,20 @@ Vec3f Model::vert(const int iface, const int nthvert) const {
 在第一章，我们进行的操作实际上是**沿 $$z$$ 轴方向的正交投影**，相当于直接把模型压扁到 $$xOy$$ 面上了。这操作很简单，也就是说我们不用管 $$z$$ 轴了，而且看起来效果还行。
 
 * **公式**：
-  $$
-  x_{screen} = x_{model} \\
-  y_{screen} = y_{model}
-  $$
+  
+  $x_{screen} = x_{model}$
+  
+  
 
+  $y_{screen} = y_{model}$
+  
 * **物理意义**：把三维物体垂直拍扁在屏幕上。
 
 * **视觉效果**：没有透视（近大远小），只有轮廓。
 
 代价就是信息的丢失，在只画线的时候感觉不明显，但是如果进入填充模式要给三角形上色，就会出现问题。这部分我们会在后面的章节解决。
 
-2、我们使用TGAImage的方法`void set(const int x, const int y, const TGAColor &c)`来设置 $$(x, y)$$ 点的像素颜色，传入的xy需要是整形，但是我们读取到的顶点坐标都是浮点型。而且打开obj文件会发现顶点的坐标都是在 $$[-1, 1]$$ 范围内，如果强行转换成整型，就会都变成 0 。
+2、我们使用TGAImage的方法`void set(const int x, const int y, const TGAColor &c)`来设置 $(x, y)$ 点的像素颜色，传入的xy需要是整形，但是我们读取到的顶点坐标都是浮点型。而且打开obj文件会发现顶点的坐标都是在 $[-1, 1]$ 范围内，如果强行转换成整型，就会都变成 0 。
 
 为了让它们正确显示，我们要把这些坐标对应到屏幕上。
 
@@ -233,7 +235,7 @@ constexpr int height = 800;
 TGAImage framebuffer(width, height, TGAImage::RGB);
 ```
 
-要把 $$[-1, 1]$$ 范围内的 $$xy$$ 分别映射到 $$[0, width]$$ 和 $$[0, height]$$，我们需要进行以下操作：
+要把 $[-1, 1]$ 范围内的 $$xy$$ 分别映射到 $[0, width]$ 和 $[0, height]$，我们需要进行以下操作：
 
 ```c++
 int screen_x0 = static_cast<int>((v0.x + 1.0f) * width / 2.0f);
@@ -997,7 +999,7 @@ $$u≥0, v≥0, w≥0$$
 
 $$u、v、w $$可由**有向面积比**求得（与边函数等价）：
 
-$$u =\tfrac{S_{PBC}} {S_{ABC}}$$，$$u =\tfrac{S_{PAC}} {S_{ABC}}$$，$$u =\tfrac{S_{ABP}} {S_{ABC}}$$
+$u =\tfrac{S_{PBC}} {S_{ABC}}$，$u =\tfrac{S_{PAC}} {S_{ABC}}$，$u =\tfrac{S_{ABP}} {S_{ABC}}$
 
 **优势**
 
@@ -1018,15 +1020,16 @@ aabb+重心坐标：
 #### 边函数法
 
 对于三角形ABC，定义三条有向边函数：
-$$
-e_1(P)=(B_x-A_x)(P_y-A_y)-(B_y-A_y)(P_x-A_x)，即 AB\times AP\\
-e_2(P)=(C_x-B_x)(P_y-B_y)-(C_y-B_y)(P_x-B_x)，即BC\times BP\\
-e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\\
-\
-$$
+
+$e_1(P)=(B_x-A_x)(P_y-A_y)-(B_y-A_y)(P_x-A_x)，即 AB\times AP\\$
+
+$e_2(P)=(C_x-B_x)(P_y-B_y)-(C_y-B_y)(P_x-B_x)，即BC\times BP\\$
+
+$e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\\$
+
 **判断规则**
 
-三角形为 **逆时针环绕**：$$e_1≥0, e_2≥0, e_3≥0$$
+三角形为 **逆时针环绕**：$e_1≥0, e_2≥0, e_3≥0$
 
 顺时针则全部 ≤ 0
 
@@ -1066,13 +1069,11 @@ $$
 
 基于线性函数的性质。
 假设我们在 $(x, y)$ 处计算出了 $E(x, y)$。当我们向右移动一个像素到 $(x+1, y)$ 时：
-$$
-\begin{aligned}
-E(x+1, y) &= A(x+1) + By + C \\
+
+$\begin{aligned}E(x+1, y) &= A(x+1) + By + C \\
 &= (Ax + By + C) + A \\
 &= E(x, y) + A
-\end{aligned}
-$$
+\end{aligned}$
 
 **这意味着：**
 只要你知道了起点的 $E$ 值，计算下一个像素的 $E$ 值**只需要做一次加法**（加上系数 $A$）。同理，换行时（$y+1$），只需要加上系数 $B$。
