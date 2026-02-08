@@ -11,6 +11,8 @@
         <link rel="canonical" href="https://mda21.github.io/crazytrain/TinyRenderer/">
       
       
+        <link rel="prev" href="..">
+      
       
       
         
@@ -21,7 +23,7 @@
     
     
       
-        <title>TinyRenderer个人学习笔记 - crazytrain</title>
+        <title>TinyRenderer - crazytrain</title>
       
     
     
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TinyRenderer个人学习笔记
+              TinyRenderer
             
           </span>
         </div>
@@ -224,11 +226,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="TinyRenderer:TinyRenderer/README.md" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -304,24 +308,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -339,7 +348,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -354,17 +363,44 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="TinyRenderer:TinyRenderer/README.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TinyRenderer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    None
+    TinyRenderer
   
 
     
@@ -373,6 +409,393 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bresenham" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bresenham画线
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bresenham画线">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一次尝试
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第一次尝试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vector.h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        model.h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelcpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        model.cpp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maincpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main.cpp
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结果与复盘
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="结果与复盘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复盘
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二次尝试
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三次尝试
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第三次尝试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-topology-pre-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 1：拓扑预处理 (Topology Pre-processing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-vertex-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 2：顶点着色 (Vertex Processing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rasterization-drawing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 3：光栅化 (Rasterization / Drawing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-projection-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 投影计算 (Projection Math)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-draw-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 画线操作 (Draw Call)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最后速度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maincpp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最终的main.cpp
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triangle-rasterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Triangle Rasterization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Triangle Rasterization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        包围盒（Bounding Box）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="包围盒（Bounding Box）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aabbaxis-aligned-bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AABB（Axis-Aligned Bounding Box 轴对齐包围盒）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obb-oriented-bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OBB (Oriented Bounding Box 方向包围盒)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        判断点在三角形内外
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="判断点在三角形内外">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重心坐标法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        边函数法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="边函数法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关于“增量”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
