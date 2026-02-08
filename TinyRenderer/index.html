@@ -1380,16 +1380,14 @@
 </code></pre></div>
 <h4 id="maincpp">main.cpp</h4>
 <p>接下来要用读取到的数据画线了，但是我们仍然会遇到两个问题。</p>
-<p>1、我们读取的坐标信息包含了 $$z$$ 轴，但是目前我们只知道设置 $$xy$$ 轴。</p>
-<p>在第一章，我们进行的操作实际上是<strong>沿 $$z$$ 轴方向的正交投影</strong>，相当于直接把模型压扁到 $$xOy$$ 面上了。这操作很简单，也就是说我们不用管 $$z$$ 轴了，而且看起来效果还行。</p>
+<p>1、我们读取的坐标信息包含了 $<span class="arithmatex">\(z\)</span>$ 轴，但是目前我们只知道设置 $<span class="arithmatex">\(xy\)</span>$ 轴。</p>
+<p>在第一章，我们进行的操作实际上是<strong>沿 $<span class="arithmatex">\(z\)</span>$ 轴方向的正交投影</strong>，相当于直接把模型压扁到 $<span class="arithmatex">\(xOy\)</span>$ 面上了。这操作很简单，也就是说我们不用管 $<span class="arithmatex">\(z\)</span>$ 轴了，而且看起来效果还行。</p>
 <ul>
-<li>
-<p><strong>公式</strong>：
-  $$
-  x_{screen} = x_{model} \
-  y_{screen} = y_{model}
-  $$</p>
-</li>
+<li><strong>公式</strong>：</li>
+</ul>
+<p><span class="arithmatex">\(x_{screen} = x_{model}\)</span></p>
+<p><span class="arithmatex">\(y_{screen} = y_{model}\)</span></p>
+<ul>
 <li>
 <p><strong>物理意义</strong>：把三维物体垂直拍扁在屏幕上。</p>
 </li>
@@ -1398,20 +1396,20 @@
 </li>
 </ul>
 <p>代价就是信息的丢失，在只画线的时候感觉不明显，但是如果进入填充模式要给三角形上色，就会出现问题。这部分我们会在后面的章节解决。</p>
-<p>2、我们使用TGAImage的方法<code>void set(const int x, const int y, const TGAColor &amp;c)</code>来设置 $$(x, y)$$ 点的像素颜色，传入的xy需要是整形，但是我们读取到的顶点坐标都是浮点型。而且打开obj文件会发现顶点的坐标都是在 $$[-1, 1]$$ 范围内，如果强行转换成整型，就会都变成 0 。</p>
+<p>2、我们使用TGAImage的方法<code>void set(const int x, const int y, const TGAColor &amp;c)</code>来设置 <span class="arithmatex">\((x, y)\)</span> 点的像素颜色，传入的xy需要是整形，但是我们读取到的顶点坐标都是浮点型。而且打开obj文件会发现顶点的坐标都是在 <span class="arithmatex">\([-1, 1]\)</span> 范围内，如果强行转换成整型，就会都变成 0 。</p>
 <p>为了让它们正确显示，我们要把这些坐标对应到屏幕上。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">//假如我初始规定了这样大小的屏幕</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="p">;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="p">;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">TGAImage</span><span class="w"> </span><span class="nf">framebuffer</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">TGAImage</span><span class="o">::</span><span class="n">RGB</span><span class="p">);</span>
 </code></pre></div>
-<p>要把 $$[-1, 1]$$ 范围内的 $$xy$$ 分别映射到 $$[0, width]$$ 和 $$[0, height]$$，我们需要进行以下操作：</p>
+<p>要把 <span class="arithmatex">\([-1, 1]\)</span> 范围内的 $<span class="arithmatex">\(xy\)</span>$ 分别映射到 <span class="arithmatex">\([0, width]\)</span> 和 <span class="arithmatex">\([0, height]\)</span>，我们需要进行以下操作：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">screen_x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">((</span><span class="n">v0</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">screen_y0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">((</span><span class="n">v0</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">screen_x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">((</span><span class="n">v1</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kt">int</span><span class="w"> </span><span class="n">screen_y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">((</span><span class="n">v1</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
 </code></pre></div>
-<p><code>.obj</code> 文件里存储的顶点坐标 $(x, y, z)$，其实是模型空间 (Model Space) 的坐标，也被称为局部空间 (Local Space)。</p>
+<p><code>.obj</code> 文件里存储的顶点坐标 <span class="arithmatex">\((x, y, z)\)</span>，其实是模型空间 (Model Space) 的坐标，也被称为局部空间 (Local Space)。</p>
 <p>为了让你彻底理解这意味着什么，以及它在后续课程中的位置，我们可以打个比方。</p>
 <p>在 TinyRenderer 的第一章，其实做了一个巨大的简化。</p>
 <p>完整的图形学流水线（Pipeline）是这样的：</p>
@@ -1428,18 +1426,18 @@
 <li><em>需要乘以 View Matrix (视图矩阵)</em>。</li>
 </ul>
 </li>
-<li><strong>裁剪空间 (Clip Space) / 归一化设备坐标 (NDC)</strong>：把视野内的东西压缩到 $[-1, 1]$ 的立方体里。<ul>
+<li><strong>裁剪空间 (Clip Space) / 归一化设备坐标 (NDC)</strong>：把视野内的东西压缩到 <span class="arithmatex">\([-1, 1]\)</span> 的立方体里。<ul>
 <li><em>需要乘以 Projection Matrix (投影矩阵)</em>。</li>
 </ul>
 </li>
-<li><strong>屏幕空间 (Screen Space)</strong>：把 $[-1, 1]$ 映射到像素坐标 $[0, 800]$。<ul>
+<li><strong>屏幕空间 (Screen Space)</strong>：把 <span class="arithmatex">\([-1, 1]\)</span> 映射到像素坐标 <span class="arithmatex">\([0, 800]\)</span>。<ul>
 <li><em>(刚才写的 <code>(x+1)*width/2</code> 就是这一步)</em></li>
 </ul>
 </li>
 </ol>
 <p><strong>现在的做法实际上是：</strong>
-假设模型就放在世界中心 $(0,0,0)$，摄像机正对着它，没有任何旋转或位移。
-所以<strong>跳过了中间所有的矩阵变换</strong>，直接把<strong>模型空间</strong>强行当成了<strong>NDC</strong>（$[-1, 1]$ 范围），然后一步转换到了<strong>屏幕空间</strong>。</p>
+假设模型就放在世界中心 <span class="arithmatex">\((0,0,0)\)</span>，摄像机正对着它，没有任何旋转或位移。
+所以<strong>跳过了中间所有的矩阵变换</strong>，直接把<strong>模型空间</strong>强行当成了<strong>NDC</strong>（<span class="arithmatex">\([-1, 1]\)</span> 范围），然后一步转换到了<strong>屏幕空间</strong>。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
@@ -1725,8 +1723,8 @@
 根据欧拉示性数和图形学统计规律，对于封闭三角网格：</p>
 <ul>
 <li><strong>顶点数 (V)</strong></li>
-<li><strong>面数 (F)</strong> $\approx 2V$</li>
-<li><strong>边数 (E)</strong> $\approx 3V$</li>
+<li><strong>面数 (F)</strong> <span class="arithmatex">\(\approx 2V\)</span></li>
+<li><strong>边数 (E)</strong> <span class="arithmatex">\(\approx 3V\)</span></li>
 </ul>
 <p>我们来看看优化前后的运算量对比：</p>
 <h4 id="1-projection-math">1. 投影计算 (Projection Math)</h4>
@@ -1734,12 +1732,12 @@
 <ul>
 <li><strong>优化前（按面遍历）</strong>：<ul>
 <li>逻辑：<code>for i in faces: for j in 0..2: project(vert)</code></li>
-<li>次数：$3 \times F \approx 3 \times 2V = \mathbf{6V}$ 次</li>
+<li>次数：<span class="arithmatex">\(3 \times F \approx 3 \times 2V = \mathbf{6V}\)</span> 次</li>
 </ul>
 </li>
 <li><strong>优化后（按点遍历）</strong>：<ul>
 <li>逻辑：<code>for i in verts: project(vert)</code></li>
-<li>次数：$1 \times V = \mathbf{1V}$ 次</li>
+<li>次数：<span class="arithmatex">\(1 \times V = \mathbf{1V}\)</span> 次</li>
 </ul>
 </li>
 <li><strong>结论</strong>：<strong>投影计算量减少了 6 倍！</strong>（因为平均每个顶点被 6 个三角形共用）。</li>
@@ -1749,13 +1747,13 @@
 <ul>
 <li><strong>优化前（按面画线）</strong>：<ul>
 <li>逻辑：每个三角形画 3 条边。</li>
-<li>次数：$3 \times F \approx 6V$ 条线。</li>
+<li>次数：<span class="arithmatex">\(3 \times F \approx 6V\)</span> 条线。</li>
 <li><em>注：因为每条边是两个面共用的，所以每条边被画了 2 次。</em></li>
 </ul>
 </li>
 <li><strong>优化后（按唯一边画线）</strong>：<ul>
 <li>逻辑：只画 <code>unique_edges</code>。</li>
-<li>次数：$1 \times E \approx \mathbf{3V}$ 条线。</li>
+<li>次数：<span class="arithmatex">\(1 \times E \approx \mathbf{3V}\)</span> 条线。</li>
 </ul>
 </li>
 <li><strong>结论</strong>：<strong>画线次数减少了 2 倍！</strong></li>
@@ -2085,11 +2083,11 @@
 <h4 id="_10">重心坐标法</h4>
 <p>对于三角形ABC</p>
 <p>任意点可表示为：</p>
-<p>$$P=uA+vB+wC,u+v+w=1$$</p>
+<div class="arithmatex">\[P=uA+vB+wC,u+v+w=1\]</div>
 <p><strong>内外判定</strong>：</p>
-<p>$$u≥0, v≥0, w≥0$$</p>
+<div class="arithmatex">\[u≥0, v≥0, w≥0\]</div>
 <p>$$u、v、w $$可由<strong>有向面积比</strong>求得（与边函数等价）：</p>
-<p>$$u =\tfrac{S_{PBC}} {S_{ABC}}$$，$$u =\tfrac{S_{PAC}} {S_{ABC}}$$，$$u =\tfrac{S_{ABP}} {S_{ABC}}$$</p>
+<p><span class="arithmatex">\(u =\tfrac{S_{PBC}} {S_{ABC}}\)</span>，<span class="arithmatex">\(u =\tfrac{S_{PAC}} {S_{ABC}}\)</span>，<span class="arithmatex">\(u =\tfrac{S_{ABP}} {S_{ABC}}\)</span></p>
 <p><strong>优势</strong></p>
 <ol>
 <li><strong>不只判内外，更用于插值</strong>：纹理坐标、顶点色、法线、雾系数等等</li>
@@ -2101,15 +2099,12 @@
 <p>aabb+重心坐标：</p>
 <p><img alt="Tryna1" src="images/chap2/Tryna1.png" /></p>
 <h4 id="_11">边函数法</h4>
-<p>对于三角形ABC，定义三条有向边函数：
-$$
-e_1(P)=(B_x-A_x)(P_y-A_y)-(B_y-A_y)(P_x-A_x)，即 AB\times AP\
-e_2(P)=(C_x-B_x)(P_y-B_y)-(C_y-B_y)(P_x-B_x)，即BC\times BP\
-e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\
-\
-$$
-<strong>判断规则</strong></p>
-<p>三角形为 <strong>逆时针环绕</strong>：$$e_1≥0, e_2≥0, e_3≥0$$</p>
+<p>对于三角形ABC，定义三条有向边函数：</p>
+<p><span class="arithmatex">\(e_1(P)=(B_x-A_x)(P_y-A_y)-(B_y-A_y)(P_x-A_x)，即 AB\times AP\\\)</span></p>
+<p><span class="arithmatex">\(e_2(P)=(C_x-B_x)(P_y-B_y)-(C_y-B_y)(P_x-B_x)，即BC\times BP\\\)</span></p>
+<p><span class="arithmatex">\(e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\\\)</span></p>
+<p><strong>判断规则</strong></p>
+<p>三角形为 <strong>逆时针环绕</strong>：<span class="arithmatex">\(e_1≥0, e_2≥0, e_3≥0\)</span></p>
 <p>顺时针则全部 ≤ 0</p>
 <p>（实际硬件会统一环绕方向）</p>
 <p><strong>优势</strong></p>
@@ -2126,25 +2121,22 @@ $$
 <p>由于我们目前的软光栅只需要判内外，所以可以不要昂贵的浮点除法，改用边函数法来判断。</p>
 <p>但是如果直接对每个像素都完整算叉乘，会产生大量乘法、加法，这反而会变得更慢，因此我参考了现代GPU光栅化器使用的<strong>增量计算</strong>的方法。这种方法通常被称为 <strong>Pineda 算法 (Edge Function Method)</strong> 的增量实现。</p>
 <h5 id="_12">数学原理</h5>
-<p>三角形的三条边其实就是三条直线。对于直线 $Ax + By + C = 0$，我们可以定义一个边函数 $E(x, y) = Ax + By + C$。</p>
+<p>三角形的三条边其实就是三条直线。对于直线 <span class="arithmatex">\(Ax + By + C = 0\)</span>，我们可以定义一个边函数 <span class="arithmatex">\(E(x, y) = Ax + By + C\)</span>。</p>
 <ul>
-<li>如果 $E(x, y) &gt; 0$，点在直线某一侧。</li>
-<li>如果 $E(x, y) &lt; 0$，点在另一侧。</li>
-<li>如果 $E(x, y) = 0$，点在直线上。</li>
+<li>如果 <span class="arithmatex">\(E(x, y) &gt; 0\)</span>，点在直线某一侧。</li>
+<li>如果 <span class="arithmatex">\(E(x, y) &lt; 0\)</span>，点在另一侧。</li>
+<li>如果 <span class="arithmatex">\(E(x, y) = 0\)</span>，点在直线上。</li>
 </ul>
-<p>如果一个点 $(x, y)$ 同时满足三条边的 $E &gt; 0$（取决于绕序），那么这个点就在三角形内部。</p>
+<p>如果一个点 <span class="arithmatex">\((x, y)\)</span> 同时满足三条边的 <span class="arithmatex">\(E &gt; 0\)</span>（取决于绕序），那么这个点就在三角形内部。</p>
 <h5 id="_13">关于“增量”</h5>
 <p>基于线性函数的性质。
-假设我们在 $(x, y)$ 处计算出了 $E(x, y)$。当我们向右移动一个像素到 $(x+1, y)$ 时：
-$$
-\begin{aligned}
-E(x+1, y) &amp;= A(x+1) + By + C \
-&amp;= (Ax + By + C) + A \
+假设我们在 <span class="arithmatex">\((x, y)\)</span> 处计算出了 <span class="arithmatex">\(E(x, y)\)</span>。当我们向右移动一个像素到 <span class="arithmatex">\((x+1, y)\)</span> 时：</p>
+<p><span class="arithmatex">\(\begin{aligned}E(x+1, y) &amp;= A(x+1) + By + C \\
+&amp;= (Ax + By + C) + A \\
 &amp;= E(x, y) + A
-\end{aligned}
-$$</p>
+\end{aligned}\)</span></p>
 <p><strong>这意味着：</strong>
-只要你知道了起点的 $E$ 值，计算下一个像素的 $E$ 值<strong>只需要做一次加法</strong>（加上系数 $A$）。同理，换行时（$y+1$），只需要加上系数 $B$。</p>
+只要你知道了起点的 <span class="arithmatex">\(E\)</span> 值，计算下一个像素的 <span class="arithmatex">\(E\)</span> 值<strong>只需要做一次加法</strong>（加上系数 <span class="arithmatex">\(A\)</span>）。同理，换行时（<span class="arithmatex">\(y+1\)</span>），只需要加上系数 <span class="arithmatex">\(B\)</span>。</p>
 <p>那么我们来看代码实现：（以下修改都在main.cpp中）</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">EdgeFunc</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">       </span><span class="c1">// E = a*x + b*y + c</span>
@@ -2308,6 +2300,12 @@ $$</p>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
