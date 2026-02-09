@@ -1,19 +1,25 @@
-site_name: crazytrain
+site_name: Stand Alone Complex
 site_url: https://mda21.github.io/crazytrain/
 
 # 1. 主题配置 (修复了重复项)
 theme:
   name: material
-  language: zh          # 设置语言
-  palette:              # 颜色模式切换
+  # 配置调色板，默认激活暗黑模式
+  palette:
+    # 第一个配置项就是默认生效的主题
+    - scheme: slate  # slate是Material主题的暗黑配色方案（也可写dark）
+      primary: indigo  # 主色调，可自定义（blue/red/pink/green等）
+      accent: indigo   # 强调色，和主色调匹配即可
+      toggle:
+        icon: material/weather-night  # 切换按钮显示「夜晚」图标
+        name: 切换到浅色模式
+    # 保留浅色模式作为可选（如果不想让用户切换，可删除这一段）
     - scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/brightness-7 
-        name: Switch to dark mode
-    - scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+        icon: material/weather-sunny  # 切换按钮显示「白天」图标
+        name: 切换到深色模式
   features:             # 功能特性
     - navigation.tabs   # 顶部导航栏
     - navigation.top    # 回到顶部按钮
@@ -38,5 +44,8 @@ extra_javascript:
 # 3. 导航栏配置 (修复了空格问题)
 nav:
   - 首页: index.md
+  - 课内笔记:
+      - 工程地质: 工程地质/工程地质知识点整理.md
   - 课外项目:
       - TinyRenderer: TinyRenderer/README.md
+  

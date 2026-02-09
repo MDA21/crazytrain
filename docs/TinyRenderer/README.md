@@ -14,7 +14,7 @@
 
 ### 第一次尝试
 
-#### 文件结构
+**文件结构**
 
 ```
 tinyrenderer/
@@ -29,7 +29,7 @@ tinyrenderer/
 
 ```
 
-#### vector.h
+**vector.h**
 
 我们需要一种数据结构来存储顶点（vertex）的xyz坐标，由于不能用`Eigen`库，我们自己定义一个简单的结构就行，这就是`vector.h`。
 
@@ -51,7 +51,7 @@ struct Vec3f
 
 tips: 标准库里的std::vector是动态数组。
 
-#### model.h
+**model.h**
 
 这个头文件包含了Model类的定义和方法，其中`filename`就是文件的路径。
 
@@ -78,7 +78,7 @@ private:
 void Log(const std::string& message);	
 ```
 
-#### model.cpp
+**model.cpp**
 
 主要的函数是`Model::Model(const std::string& filename)`，用于加载模型
 
@@ -202,7 +202,7 @@ Vec3f Model::vert(const int iface, const int nthvert) const {
 
 ```
 
-#### main.cpp
+**main.cpp**
 
 接下来要用读取到的数据画线了，但是我们仍然会遇到两个问题。
 
@@ -336,11 +336,11 @@ int main(int argc, char** argv) {
 
 ### 结果与复盘
 
-#### 结果
+**结果**
 
 我们会得到以下图片：![diablo1](images/chap1/diablo1.png)
 
-#### 复盘
+**复盘**
 
 我们引入`chrono`库进行记时，并且让核心的画线部分循环1000次。由于解析 OBJ 是文件 IO 操作，耗时且解析后的数据不会变，重复解析只会让计时结果失真，所以不放进循环。
 
@@ -461,7 +461,8 @@ tips: 在实时渲染中，**重复绘制** 确实是一个性能杀手。虽然
 
 整个渲染过程被拆分成了三个清晰的阶段：
 
-#### 阶段 1：拓扑预处理 (Topology Pre-processing)
+**阶段 1：拓扑预处理 (Topology Pre-processing)**
+
 *   **位置**：主循环外部（只执行 1 次）。
 *   **任务**：搞清楚“到底有多少条唯一的边”。
 *   **逻辑**：
@@ -531,7 +532,8 @@ int main(int argc, char** argv) {
 
 
 
-#### 阶段 2：顶点着色 (Vertex Processing)
+**阶段 2：顶点着色 (Vertex Processing)**
+
 *   **位置**：渲染循环内部（每一帧执行）。
 *   **任务**：计算所有顶点在屏幕上的位置。
 *   **逻辑**：
@@ -568,7 +570,8 @@ for (int k = 0; k < LOOP_TIMES; k++) {
 
 
 
-#### 阶段 3：光栅化 (Rasterization / Drawing)
+**阶段 3：光栅化 (Rasterization / Drawing)**
+
 *   **位置**：渲染循环内部（每一帧执行）。
 *   **任务**：连线。
 *   **逻辑**：
@@ -586,7 +589,8 @@ for (int k = 0; k < LOOP_TIMES; k++) {
 
 我们来看看优化前后的运算量对比：
 
-#### 1. 投影计算 (Projection Math)
+**1. 投影计算 (Projection Math)**
+
 这是浮点运算，比较耗时。
 
 *   **优化前（按面遍历）**：
@@ -597,7 +601,8 @@ for (int k = 0; k < LOOP_TIMES; k++) {
     *   次数：$1 \times V = \mathbf{1V}$ 次
 *   **结论**：**投影计算量减少了 6 倍！**（因为平均每个顶点被 6 个三角形共用）。
 
-#### 2. 画线操作 (Draw Call)
+**2. 画线操作 (Draw Call)**
+
 这是整数运算和内存写入，也非常耗时。
 
 *   **优化前（按面画线）**：
@@ -985,7 +990,7 @@ void triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuf
 
 ### 判断点在三角形内外
 
-#### 重心坐标法
+**重心坐标法**
 
 对于三角形ABC
 
@@ -997,7 +1002,7 @@ $$P=uA+vB+wC,u+v+w=1$$
 
 $$u≥0, v≥0, w≥0$$
 
-$$u、v、w $$可由**有向面积比**求得（与边函数等价）：
+$u、v、w $可由**有向面积比**求得（与边函数等价）：
 
 $u =\tfrac{S_{PBC}} {S_{ABC}}$，$u =\tfrac{S_{PAC}} {S_{ABC}}$，$u =\tfrac{S_{ABP}} {S_{ABC}}$
 
@@ -1017,7 +1022,7 @@ aabb+重心坐标：
 
 
 
-#### 边函数法
+**边函数法**
 
 对于三角形ABC，定义三条有向边函数：
 
@@ -1055,7 +1060,7 @@ $e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\\$
 
 但是如果直接对每个像素都完整算叉乘，会产生大量乘法、加法，这反而会变得更慢，因此我参考了现代GPU光栅化器使用的**增量计算**的方法。这种方法通常被称为 **Pineda 算法 (Edge Function Method)** 的增量实现。
 
-##### 数学原理
+**数学原理**
 
 三角形的三条边其实就是三条直线。对于直线 $Ax + By + C = 0$，我们可以定义一个边函数 $E(x, y) = Ax + By + C$。
 
@@ -1065,7 +1070,7 @@ $e_3(P)=(A_x-C_x)(P_y-C_y)-(A_y-C_y)(P_x-C_x)，即CA\times CP\\$
 
 如果一个点 $(x, y)$ 同时满足三条边的 $E > 0$（取决于绕序），那么这个点就在三角形内部。
 
-##### 关于“增量”
+**关于“增量”**
 
 基于线性函数的性质。
 假设我们在 $(x, y)$ 处计算出了 $E(x, y)$。当我们向右移动一个像素到 $(x+1, y)$ 时：
@@ -1199,4 +1204,82 @@ struct Vertices {
 };
 ```
 
-同理可以把`triangle`函数里面的计算逻辑改成类似的试试看，拿内存换速度这一块，不过现在绘制一帧大概只需要0.006秒，就先不优化了喵。
+同理可以把`triangle`函数里面的计算逻辑改成类似的试试看，拿内存换速度这一块，不过现在绘制一帧大概只需要0.006秒，就先不优化了喵。    
+
+打算都做完一起爆改逻辑。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+## Barycentric Coordinates
+
+这部分的作业就是利用重心坐标插值，画一个全彩三角形。
+
+我们前面有提到，重心坐标和边函数的值可以很简单的转换：
+
+```c++
+void triangle(int ax, int ay, int az, TGAColor colorA, int bx, int by, int bz, TGAColor colorB, int cx, int cy, int cz, TGAColor colorC, TGAImage& framebuffer) {
+	double total_area = signed_triangle_area(ax, ay, bx, by, cx, cy);
+	if (total_area < 1)return;
+	
+	Vec2i A(ax, ay);
+	Vec2i B(bx, by);
+	Vec2i C(cx, cy);
+	EdgeFunc e1, e2, e3;
+	precompute_edge_funcs(A, B, C, e1, e2, e3);
+	
+	int min_x = std::min({ ax, bx, cx });
+	int max_x = std::max({ ax, bx, cx });
+	int min_y = std::min({ ay, by, cy });
+	int max_y = std::max({ ay, by, cy });
+
+	min_x = std::max(0, min_x);
+	max_x = std::min(framebuffer.width() - 1, max_x);
+	min_y = std::max(0, min_y);
+	max_y = std::min(framebuffer.height() - 1, max_y);
+
+	if (max_x < min_x || max_y < min_y) return;
+	
+	
+#pragma omp parallel for
+	for(int y = min_y; y <= max_y; y++) {
+
+		int row_E1 = e1.a * min_x + e1.b * y + e1.c;
+		int row_E2 = e2.a * min_x + e2.b * y + e2.c;
+		int row_E3 = e3.a * min_x + e3.b * y + e3.c;
+
+		for(int x = min_x; x <= max_x; x++) {
+
+			if (row_E1 >= 0 && row_E2 >= 0 && row_E3 >= 0) {
+				double alpha = row_E2 * 0.5 / total_area;
+				double beta = row_E3 * 0.5 / total_area;
+				double gamma = row_E1 * 0.5 / total_area;
+
+				std::uint8_t b = static_cast<std::uint8_t>(alpha * colorA[0] + beta * colorB[0] + gamma * colorC[0]);
+				std::uint8_t g = static_cast<std::uint8_t>(alpha * colorA[1] + beta * colorB[1] + gamma * colorC[1]);
+				std::uint8_t r = static_cast<std::uint8_t>(alpha * colorA[2] + beta * colorB[2] + gamma * colorC[2]);
+
+				TGAColor color = { b, g, r, 255 }; // 注意BGRA顺序
+
+				framebuffer.set(x, y, color);
+			}
+			row_E1 += e1.step_x;
+			row_E2 += e2.step_x;
+			row_E3 += e3.step_x;
+			
+		}
+	}
+}
+```
+
+你可以在[这里](https://github.com/MDA21/TinyRendererNote/tree/src/main.cpp)看到完整的代码。
+
+结果：
+
+![Triangle(1)](images/chap2/Triangle(1).png)
+
+
+
+## Hidden Face Removal
+
+
+
