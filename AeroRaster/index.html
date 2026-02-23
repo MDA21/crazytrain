@@ -8,29 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://mda21.github.io/crazytrain/LearnOpenGL/LearnOpenGL/">
+        <link rel="canonical" href="https://mda21.github.io/crazytrain/AeroRaster/">
       
       
-        <link rel="prev" href="../../AeroRaster/">
+        <link rel="prev" href="../TinyRenderer/">
       
+      
+        <link rel="next" href="../LearnOpenGL/LearnOpenGL/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>LearnOpenGL备忘录 - Stand Alone Complex</title>
+        <title>AeroRaster - Stand Alone Complex</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#uniform" class="md-skip">
+        <a href="#aeroraster-high-performance-software-rasterizer" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Stand Alone Complex" class="md-header__button md-logo" aria-label="Stand Alone Complex" data-md-component="logo">
+    <a href=".." title="Stand Alone Complex" class="md-header__button md-logo" aria-label="Stand Alone Complex" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LearnOpenGL备忘录
+              AeroRaster
             
           </span>
         </div>
@@ -209,7 +211,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -230,7 +232,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="md-tabs__link">
+        <a href="../%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="md-tabs__link">
           
   
   
@@ -252,7 +254,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../TinyRenderer/" class="md-tabs__link">
+        <a href="../TinyRenderer/" class="md-tabs__link">
           
   
   
@@ -286,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Stand Alone Complex" class="md-nav__button md-logo" aria-label="Stand Alone Complex" data-md-component="logo">
+    <a href=".." title="Stand Alone Complex" class="md-nav__button md-logo" aria-label="Stand Alone Complex" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -304,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -381,7 +383,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="md-nav__link">
+      <a href="../%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="md-nav__link">
         
   
   
@@ -471,7 +473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../TinyRenderer/" class="md-nav__link">
+      <a href="../TinyRenderer/" class="md-nav__link">
         
   
   
@@ -479,34 +481,6 @@
     
   
     TinyRenderer
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../AeroRaster/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    AeroRaster
   
 
     
@@ -541,7 +515,7 @@
   <span class="md-ellipsis">
     
   
-    LearnOpenGL备忘录
+    AeroRaster
   
 
     
@@ -559,7 +533,7 @@
   <span class="md-ellipsis">
     
   
-    LearnOpenGL备忘录
+    AeroRaster
   
 
     
@@ -583,13 +557,52 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#uniform" class="md-nav__link">
+  <a href="#aeroraster-high-performance-software-rasterizer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uniform关键字
+        AeroRaster - High Performance Software Rasterizer
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="AeroRaster - High Performance Software Rasterizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        技术实现细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能测试数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -597,6 +610,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LearnOpenGL/LearnOpenGL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LearnOpenGL备忘录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -634,13 +675,52 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#uniform" class="md-nav__link">
+  <a href="#aeroraster-high-performance-software-rasterizer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uniform关键字
+        AeroRaster - High Performance Software Rasterizer
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="AeroRaster - High Performance Software Rasterizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        技术实现细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能测试数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -661,61 +741,78 @@
 
 
 
-  <h1>LearnOpenGL备忘录</h1>
+  <h1>AeroRaster</h1>
 
-<h2 id="uniform">Uniform关键字</h2>
-<p>uniform是全局的。</p>
-<p>如果你声明了一个uniform却在GLSL代码中没用过，编译器会静默移除这个变量，导致最后编译出的版本中并不会包含它，这可能导致几个非常麻烦的错误。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#version 330 core</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">out</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">FragColor</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">ourColor</span><span class="p">;</span><span class="w"> </span><span class="c1">// 在OpenGL程序代码中设定这个变量</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">{</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">FragColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ourColor</span><span class="p">;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div>
-<p>绘制的时候进行修改：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">vertexColorLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glGetUniformLocation</span><span class="p">(</span><span class="n">shaderProgram</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ourColor&quot;</span><span class="p">);</span><span class="w"> </span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">glUseProgram</span><span class="p">(</span><span class="n">shaderProgram</span><span class="p">);</span><span class="c1">//调用程序</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">glUniform4f</span><span class="p">(</span><span class="n">vertexColorLocation</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">greenValue</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
-</code></pre></div>
-<p>我们用<code>glGetUniformLocation</code>查询<code>uniform ourColor</code>的位置值。我们为查询函数提供着色器程序和uniform的名字（这是我们希望获得的位置值的来源）。如果glGetUniformLocation返回<code>-1</code>就代表没有找到这个位置值。最后，我们可以通过<code>glUniform4f</code>函数设置uniform值。注意，查询uniform地址不要求你之前使用过着色器程序，但是更新一个uniform之前你必须先使用程序（调用<code>glUseProgram</code>)，因为它是在当前激活的着色器程序中设置uniform的。</p>
-<p>OpenGL在其核心是一个C库，所以它不支持类型重载，在函数参数不同的时候就要为其定义新的函数；<code>glUniform</code>是一个典型例子。这个函数有一个特定的后缀，标识设定的uniform的类型。可能的后缀有：</p>
+<h3 id="aeroraster-high-performance-software-rasterizer">AeroRaster - High Performance Software Rasterizer</h3>
+<p><strong>开发环境</strong>：Windows / Visual Studio / C++17
+<strong>核心依赖</strong>：Eigen (数学库), tinyobjloader (模型加载), stb_image (纹理加载)</p>
+<h4 id="_1"><strong>项目概述</strong></h4>
+<p>这是一个纯 CPU 驱动的软件渲染器，旨在不依赖图形 API（OpenGL/DirectX）的情况下，通过底层优化实现实时渲染管线。主要关注点在于<strong>缓存友好性</strong>、<strong>指令级并行（SIMD）</strong>以及<strong>多核任务调度</strong>的实现。</p>
+<h4 id="_2"><strong>技术实现细节</strong></h4>
+<ul>
+<li>
+<p><strong>数据布局优化 (Memory Layout)</strong></p>
+<ul>
+<li>为了提高缓存命中率，模型数据在加载后被重组为 <strong>SoA (Structure of Arrays)</strong> 布局，而非传统的 AoS (Array of Structures)。</li>
+<li>所有几何数据（顶点、法线、UV）均强制对齐到 <strong>32 字节</strong>，以适配 AVX2 的 <code>_mm256_load_ps</code> 指令，减少非对齐加载开销。</li>
+</ul>
+</li>
+<li>
+<p><strong>光栅化核心 (Rasterization Core)</strong></p>
+<ul>
+<li>基于 Pineda 算法实现三角形遍历，并使用 <strong>AVX2 Intrinsics</strong> 进行向量化，单次指令处理 8 个像素的覆盖判断。</li>
+<li>引入 <strong>BMI1 指令集</strong>（<code>_tzcnt_u32</code> 等）实现掩码迭代器，通过位运算直接跳过无效像素块，避免了使用 <code>_mm256_maskstore_ps</code> 带来的微码开销。</li>
+</ul>
+</li>
+<li>
+<p><strong>多线程任务系统 (Job System)</strong></p>
+<ul>
+<li>采用了基于 Tile（分块）的并行渲染架构。</li>
+<li>实现了一个基于 <code>std::atomic</code> 的无锁任务队列（Lock-free Queue），支持动态任务分发。</li>
+<li>这种设计有效解决了大小核架构（P-Core/E-Core）下的负载不均问题，确保所有核心在渲染阶段保持满载。</li>
+</ul>
+</li>
+<li>
+<p><strong>管线优化策略</strong></p>
+<ul>
+<li><strong>几何阶段</strong>：经测试发现，在极短的几何处理任务中，多线程的上下文切换开销大于收益。因此，几何变换与分拣（Binning）阶段采用单线程标量优化（Scalar Optimization），利用编译器别名分析（<code>__restrict</code>）和快速浮点取整指令提升效率。</li>
+<li><strong>光栅化阶段</strong>：采用 16 线程全并行处理。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_3"><strong>性能测试数据</strong></h4>
+<ul>
+<li><strong>测试硬件</strong>：Intel Core i7-12650H (6P+4E), 16GB RAM</li>
+<li><strong>测试场景</strong>：Diablo3 角色模型 (3264 顶点, 5022 三角面), Blinn-Phong 光照, 1024x1024 纹理 (Diffuse/Normal/Spec)</li>
+<li><strong>分辨率</strong>：800x600</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">后缀</th>
-<th style="text-align: left;">含义</th>
+<th style="text-align: left;">测试项</th>
+<th style="text-align: left;">结果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>f</code></td>
-<td style="text-align: left;">函数需要一个float作为它的值</td>
+<td style="text-align: left;"><strong>平均帧率</strong></td>
+<td style="text-align: left;"><strong>~1300 FPS</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>i</code></td>
-<td style="text-align: left;">函数需要一个int作为它的值</td>
+<td style="text-align: left;"><strong>平均帧时</strong></td>
+<td style="text-align: left;"><strong>0.75 ms</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>ui</code></td>
-<td style="text-align: left;">函数需要一个unsigned int作为它的值</td>
+<td style="text-align: left;"><strong>几何与分拣耗时</strong></td>
+<td style="text-align: left;">0.075 ms (单线程)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>3f</code></td>
-<td style="text-align: left;">函数需要3个float作为它的值</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>fv</code></td>
-<td style="text-align: left;">函数需要一个float向量/数组作为它的值</td>
+<td style="text-align: left;"><strong>光栅化耗时</strong></td>
+<td style="text-align: left;">0.68 ms (16 线程 AVX2)</td>
 </tr>
 </tbody>
 </table>
-<p>每当你打算配置一个OpenGL的选项时就可以简单地根据这些规则选择适合你的数据类型的重载函数。在我们的例子里，我们希望分别设定uniform的4个float值，所以我们通过<code>glUniform4f</code>传递我们的数据(注意，我们也可以使用<code>fv</code>版本)。</p>
+<p><img alt="Diablo" src="images/Diablo.webp" /></p>
 
 
 
@@ -771,12 +868,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
