@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#uniform" class="md-skip">
+        <a href="#opengl" class="md-skip">
           Skip to content
         </a>
       
@@ -583,6 +583,62 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#opengl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenGL绘制核心流程概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一些关键概念与api
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一些关键概念与api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        顶点缓冲对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        顶点数组对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        纹理加载
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#uniform" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -590,6 +646,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -634,6 +695,62 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#opengl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenGL绘制核心流程概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一些关键概念与api
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一些关键概念与api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        顶点缓冲对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        顶点数组对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        纹理加载
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#uniform" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -641,6 +758,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -663,7 +785,113 @@
 
   <h1>LearnOpenGL备忘录</h1>
 
-<h2 id="uniform">Uniform关键字</h2>
+<p>这里是记录LearnOpenGL过程中的一些小笔记（？）</p>
+<p>api，特别是不常常用的话，太容易忘记了</p>
+<h2 id="opengl">OpenGL绘制核心流程概览</h2>
+<p>一个典型的OpenGL程序（特别是使用核心模式时）的绘制流程可以概括为以下几个阶段。你可以把它当作一个检查清单来用：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">阶段</th>
+<th style="text-align: left;">核心任务</th>
+<th style="text-align: left;">关键API/步骤</th>
+<th style="text-align: left;">主要目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>初始化阶段</strong></td>
+<td style="text-align: left;">创建窗口和OpenGL上下文</td>
+<td style="text-align: left;"><code>glfwInit()</code>, <code>glfwCreateWindow()</code>, <code>gladLoadGL()</code></td>
+<td style="text-align: left;">让程序具备与GPU通信的能力。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据准备阶段</strong></td>
+<td style="text-align: left;">创建VAO，绑定数据</td>
+<td style="text-align: left;">① 生成并绑定<strong>VAO</strong>；② 生成并绑定<strong>VBO</strong>；③ 使用<code>glBufferData</code>传输顶点数据；④ 通过<code>glVertexAttribPointer</code>设置顶点属性解析方式；⑤ 启用顶点属性。</td>
+<td style="text-align: left;">将CPU端的顶点数据（位置、颜色、纹理坐标等）上传到GPU，并告诉GPU如何解析这些数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>资源准备阶段</strong></td>
+<td style="text-align: left;">编译着色器与加载纹理</td>
+<td style="text-align: left;">① 创建并编译<strong>顶点着色器</strong>和<strong>片段着色器</strong>；② 创建<strong>着色器程序</strong>并链接着色器；③ 生成纹理ID，绑定纹理，使用<code>glTexImage2D</code>加载图片数据，并设置纹理参数。</td>
+<td style="text-align: left;">定义渲染的视觉效果和规则。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>渲染循环</strong></td>
+<td style="text-align: left;">执行绘制命令</td>
+<td style="text-align: left;">① 清空屏幕（<code>glClear</code>）；② <strong>使用</strong>（<code>glUseProgram</code>）着色器程序；③ <strong>绑定</strong>（<code>glBindVertexArray</code>）对应的VAO；④ 调用绘制函数，如<code>glDrawArrays</code>或<code>glDrawElements</code>；⑤ 交换缓冲区（<code>glfwSwapBuffers</code>）。</td>
+<td style="text-align: left;">告诉GPU开始渲染，并显示渲染结果。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>资源释放</strong></td>
+<td style="text-align: left;">清理对象</td>
+<td style="text-align: left;"><code>glDeleteVertexArrays</code>, <code>glDeleteBuffers</code>, <code>glDeleteProgram</code>等</td>
+<td style="text-align: left;">防止内存泄漏。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api">一些关键概念与api</h2>
+<h3 id="_1">顶点缓冲对象</h3>
+<p>VBO是第一个被创建的缓冲区，负责在GPU的显存中开辟一块空间，用来存放大量的顶点数据。</p>
+<ul>
+<li><code>glGenBuffers(GLsizei n, GLuint *buffers)</code></li>
+<li><strong>作用</strong>：生成<code>n</code>个未使用的缓冲对象ID。</li>
+<li><strong>参数</strong>：<code>n</code>是要生成的ID数量；<code>buffers</code>是存放ID的数组地址。</li>
+<li><code>glBindBuffer(GLenum target, GLuint buffer)</code></li>
+<li><strong>作用</strong>：将一个缓冲对象绑定到指定的目标上。OpenGL是个状态机，绑定后，所有对该目标的后续操作都将作用于这个缓冲区。</li>
+<li><strong>参数</strong>：<code>target</code>通常是<code>GL_ARRAY_BUFFER</code>（表示顶点数据）；<code>buffer</code>是由<code>glGenBuffers</code>生成的ID。</li>
+<li><code>glBufferData(GLenum target, GLsizeiptr size, const void *data, GLenum usage)</code></li>
+<li><strong>作用</strong>：为当前绑定的缓冲区分配内存，并填充数据。</li>
+<li><strong>参数</strong>：<code>target</code>应与<code>glBindBuffer</code>一致；<code>size</code>是数据的字节大小；<code>data</code>是指向源数据的指针；<code>usage</code>指定数据的使用方式，如<code>GL_STATIC_DRAW</code>（数据基本不变）或<code>GL_DYNAMIC_DRAW</code>（频繁变化），帮助GPU优化。</li>
+</ul>
+<h3 id="_2">顶点数组对象</h3>
+<p>VAO就像一个“数据快递单”，它本身不存储顶点数据，而是存储了VBO的绑定关系和顶点属性的解析规则。使用VAO可以极大简化绘制多个不同物体时的代码。</p>
+<ul>
+<li><code>glGenVertexArrays(GLsizei n, GLuint *arrays)</code></li>
+<li><code>glBindVertexArray(GLuint array)</code></li>
+<li><strong>作用</strong>：绑定一个VAO。从此以后，所有对顶点属性的配置（如<code>glVertexAttribPointer</code>）都会被这个VAO记录下来。</li>
+<li><strong>核心函数：<code>glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void \*pointer)</code></strong></li>
+<li><strong>作用</strong>：<strong>这是最关键的函数之一</strong>。它告诉OpenGL，当前绑定的VBO中的数据应该如何解析。</li>
+<li><strong>参数详解</strong>：<ul>
+<li><code>index</code>：顶点属性的位置，与着色器中<code>layout(location = 0)</code>的值对应。</li>
+<li><code>size</code>：每个属性的分量个数。例如位置是3个（x, y, z），纹理坐标是2个（u, v）。</li>
+<li><code>type</code>：数据类型，通常是<code>GL_FLOAT</code>。</li>
+<li><code>normalized</code>：是否希望整数类型的数据被映射到0到1或-1到1之间。对于<code>GL_FLOAT</code>类型的数据，通常设为<code>GL_FALSE</code>。</li>
+<li><code>stride</code>：<strong>步长</strong>。指在同一个顶点的数据中，从这个属性到下一个顶点的同一属性之间间隔了多少字节。如果数据排列得很紧密，也可以设为0。</li>
+<li><code>pointer</code>：<strong>偏移量</strong>。指在这个缓冲区中，当前这个属性从第几个字节开始。需要强制转换为<code>(void*)</code>类型。</li>
+</ul>
+</li>
+<li><code>glEnableVertexAttribArray(GLuint index)</code></li>
+<li><strong>作用</strong>：启用对应索引的顶点属性。默认是禁用的，必须手动启用，否则数据不会被传递到着色器。</li>
+</ul>
+<h3 id="_3">纹理加载</h3>
+<p>纹理加载就是将一张图片上传到GPU，并建立一套采样规则。</p>
+<ul>
+<li><code>glGenTextures(GLsizei n, GLuint *textures)</code></li>
+<li><code>glBindTexture(GLenum target, GLuint texture)</code></li>
+<li><strong>作用</strong>：生成并绑定纹理对象。<code>target</code>对于普通2D纹理是<code>GL_TEXTURE_2D</code>。</li>
+<li>加载图像数据：<code>glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void \*data)</code></li>
+<li><strong>作用</strong>：将图像数据从CPU内存传输到当前绑定的纹理对象上。</li>
+<li><strong>参数详解</strong>：<ul>
+<li><code>target</code>：纹理目标，2D纹理用<code>GL_TEXTURE_2D</code>。</li>
+<li><code>level</code>：多级渐远纹理的级别，0表示基本级别。</li>
+<li><code>internalformat</code>：你<strong>希望</strong>OpenGL<strong>将纹理存储</strong>为什么格式（如<code>GL_RGB</code>）。</li>
+<li><code>width</code>, <code>height</code>：纹理的宽度和高度。</li>
+<li><code>border</code>：历史遗留，必须为0。</li>
+<li><code>format</code> 和 <code>type</code>：你<strong>发过来的数据</strong>是什么格式（如<code>GL_RGB</code>）和数据类型（如<code>GL_UNSIGNED_BYTE</code>）。</li>
+<li><code>data</code>：指向图像数据的指针。</li>
+</ul>
+</li>
+<li><strong>设置纹理参数：<code>glTexParameteri(GLenum target, GLenum pname, GLint param)</code></strong></li>
+<li><strong>作用</strong>：设置纹理的环绕方式和过滤方式。</li>
+<li><strong>示例</strong>：<code>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)</code> 设置缩小时的过滤方式为线性过滤。</li>
+<li><strong>激活纹理单元：<code>glActiveTexture(GLenum texture)</code></strong></li>
+<li><strong>作用</strong>：OpenGL提供多个纹理单元供你使用（如<code>GL_TEXTURE0</code>, <code>GL_TEXTURE1</code>）。在绑定纹理前，需要先激活目标纹理单元。</li>
+<li><strong>在着色器中关联：<code>glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0)</code></strong></li>
+<li><strong>作用</strong>：将着色器中的<code>uniform sampler2D</code>变量（名为"texture1"）绑定到纹理单元0。这样，纹理单元0上绑定的纹理就会传递给着色器中的<code>texture1</code>变量。</li>
+</ul>
+<h3 id="uniform">Uniform关键字</h3>
 <p>uniform是全局的。</p>
 <p>如果你声明了一个uniform却在GLSL代码中没用过，编译器会静默移除这个变量，导致最后编译出的版本中并不会包含它，这可能导致几个非常麻烦的错误。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#version 330 core</span>
